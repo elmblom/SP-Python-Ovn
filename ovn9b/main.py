@@ -1,5 +1,4 @@
 import json
-from IPython.display import clear_output
 
 def greet():
     print("Welcome! What would you like to do?")
@@ -54,10 +53,20 @@ def signup():
                     return
         break
     with open("customers.json", "w+") as f:
-        print("Signup process succesfull, actually creating the account does not work yet")
-                
+        new_user = {
+            "un": UN,
+            "tn": TN,
+            "pw": PW,
+            "uid": len(users) + 1
+        }
+        users.append(new_user)
+        f.seek(0)
+        json.dump(users, f, indent=4)
+        f.truncate()
+        print("Account created succesfully!")
+        login()
+                        
 def actions():
-    clear_output()
     print("0 - Loan")
     print("1 - Return")
     print("2 - View Account Info")
@@ -76,15 +85,22 @@ def actions():
         actions()
 
 def loan():
-    clear_output()
-    with open("./movies.json", "r") as f:
-        data = json.load(f)   
-    print("Available Titles:")
-    i = 0
-    for x in data:
-        if x["Available"] == 1:
-            print("{} - {}".format(i,x["Title"]))
-            i+=1      
-    usel = int(input("Choose A Title By Entering It's Corresponding Number: "))
+    while True:
+        with open("./movies.json", "r") as f:
+            data = json.load(f)   
+        print("Available Titles:")
+        i = 0
+        for x in data:
+            if x["Available"] == 1:
+                print("{} - {}".format(i,x["Title"]))
+                i+=1      
+        usel = int(input("Choose A Title By Entering It's Corresponding Number: "))
+        if usel > i-1:
+            print("No movie with that id!")
+            continue
+        else:
+            break
+    with open("./movies.json", "w+") as f:
+    
 
 greet()
