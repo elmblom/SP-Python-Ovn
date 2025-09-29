@@ -1,14 +1,9 @@
 [
     {
-        "uid": 1,
+        "uid": 0,
         "un": "admin",
         "tn": "1234-5678-9012-3456",
-        "pw": "password123"
-    },
-    {
-        "un": "newuser",
-        "tn": "0403724841",
-        "pw": "secret",
-        "uid": 2
+        "pw": "password123",
+        "loans": []
     }
 ]
